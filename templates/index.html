@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
 <head>
     <title>Las Vegas Valley Inmate Lookup</title>
 
@@ -16,47 +16,92 @@
     <link rel="stylesheet" href="static/css/style.css">
     <link rel="stylesheet" href="static/css/headers/header1.css">
     <link rel="stylesheet" href="static/css/responsive.css">
-    <link rel="shortcut icon" href="favicon.ico">        
-    <!-- CSS Implementing Plugins -->    
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="static/plugins/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="static/plugins/flexslider/flexslider.css">
     <link rel="stylesheet" href="static/plugins/parallax-slider/css/parallax-slider.css">
-    <!-- CSS Theme -->    
+    <!-- CSS Theme -->
     <link rel="stylesheet" href="static/css/themes/default.css" id="style_color">
     <!--<link rel="stylesheet" href="static/css/themes/headers/default.css" id="style_color-header-1">-->
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-        <script>
-            var apiKey = 'AIzaSyAGTLAso302SnmP6RNqwUUfMhZX2kml9R8';
-            var map;
-            var myLatLong = new google.maps.LatLng(36.1666705,-115.103375);
-            function initialize() {
-              var mapOptions = {
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&v=3.exp&sensor=false"></script>
+    <script>
+        var map;
+        var infowindow;
+        var myLatLong;
+        function initialize(lat, long, name) {
+            myLatLong = new google.maps.LatLng(lat, long);
+            var mapOptions = {
                 zoom: 15,
                 center: myLatLong };
-              map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-              //Detention center
-              var infowindow = new google.maps.InfoWindow({
-                   content: "<p>City of Las Vegas Detention Center"
-              });
-              var marker = new google.maps.Marker({
+            //Detention center
+            var prisonwindow = new google.maps.InfoWindow({
+                content: name
+            });
+
+            var marker = new google.maps.Marker({
                 position: myLatLong,
                 map: map,
-                title: 'City Of Las Vegas Detention Center'
-               });
-               infowindow.open(map,marker);
+                title: name
+            });
+            prisonwindow.open(map,marker);
 
-               //Get Bail bonds
-               var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=' + apiKey +
-                       '&location='+ myLatLong.toUrlValue() +'&radius=1000&sensor=false&keyword=bail%bonds';
+            //Get Bail bonds
+            var request = {
+                location: myLatLong,
+                radius: 1000,
+                keyword: "bail bonds service"
+            };
+            infowindow = new google.maps.InfoWindow();
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch(request, nearbyCallback);
+            window.location.href = "#maprow";
 
+        }
+
+        function nearbyCallback(results, status){
+            if (status == google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    createMarker(results[i]);
+                }
             }
+        }
 
-            google.maps.event.addDomListener(window, 'load', initialize);
+        function createMarker(place) {
+            var placeLoc = place.geometry.location;
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location,
+                icon: "http://maps.google.com/mapfiles/marker_grey.png"
+            });
 
-        </script>
-</head>	
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(place.name);
+                infowindow.open(map, this);
+            });
+        }
+
+        function initializeLV(){
+            initialize(36.1666705,-115.103375, 'City Of Las Vegas Detention Center');
+            return false;
+        }
+
+        function initializeHenderson(){
+            initialize(36.0310225,-114.97872489999997, 'Henderson Detention Center');
+            return false;
+        }
+
+        function initializeClarkCounty(){
+            initialize(36.1673983,-115.14681180000002, 'Clark County Detention Center');
+            return false;
+        }
+
+
+    </script>
+</head>
 
 <body>
 
@@ -82,12 +127,12 @@
             <div class="col-md-12">
                 <span>Search for your inmate</span>
                 <p>
-                    <form class="form-inline" action="/" method="post">
-                        <input type="text" value="{{ term }}" name="term">
-                        <button type="submit" class="btn-u btn-u-default">Search Now</button>
-                    </form>
+                <form class="form-inline" action="/" method="post">
+                    <input type="text" value="{{ term }}" name="term">
+                    <button type="submit" class="btn-u btn-u-default">Search Now</button>
+                </form>
                 </p>
-            </div>            
+            </div>
 
         </div>
     </div>
@@ -96,56 +141,66 @@
 
 <!--=== Content Part ===-->
 <div class="container">
-	<!-- Service Blocks -->
-	<div class="row">
-    	<div class="col-md-12">
-    		<div class="service">
+    <!-- Service Blocks -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="service">
                 {% if term %}
-    			<div class="panel panel-blue margin-bottom-40">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Search Results</h3>
+                    <div class="panel panel-blue margin-bottom-40">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Search Results</h3>
+                        </div>
+                        {% if results %}
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <th>First Name</th>
+                                    <th>Age</th>
+                                    <th>Book Date</th>
+                                    <th>Prison</th>
+                                    <th>Inmate ID</th>
+                                    <th>Bail</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for result in results %}
+                                    <tr>
+                                        <td>{{ result['Last Name'] }}</td>
+                                        <td>{{ result['First Name'] }}</td>
+                                        <td>{{ result['Age'] }}</td>
+                                        <td>{{ result['Book Date'] }}</td>
+                                        {% if result['Prison'] == 'Las Vegas' %}
+                                            <td><a onclick="initializeLV();">{{ result['Prison'] }}</a></td>
+                                        {% elif result['Prison'] == 'Henderson' %}
+                                            <td><a onclick="initializeHenderson();">{{ result['Prison'] }}</a></td>
+                                        {% elif result['Prison'] == 'Clark County' %}
+                                            <td><a onclick="initializeClarkCounty();">{{ result['Prison'] }}</a></td>
+                                        {% else %}
+                                            <td>{{ result['Prison'] }}</td>
+                                        {% endif %}
+
+                                        <td>{{ result['ID'] }}</td>
+                                        <td>{{ result['Bail'] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <h4>No Results Found</h4>
+                        {% endif %}
                     </div>
-                    {% if results %}
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Last Name</th>
-                                <th>First Name</th>
-                                <th>Age</th>
-                                <th>Book Date</th>
-                                <th>Prison</th>
-                                <th>Inmate ID</th>
-                                <th>Bail</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for result in results %}
-                            <tr>
-                                <td>{{ result['Last Name'] }}</td>
-                                <td>{{ result['First Name'] }}</td>
-                                <td>{{ result['Age'] }}</td>
-                                <td>{{ result['Book Date'] }}</td>
-                                <td>{{ result['Prison'] }}</td>
-                                <td>{{ result['ID'] }}</td>
-                                <td>{{ result['Bail'] }}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                        <h4>No Results Found</h4>
-                    {% endif %}
-    			</div>
                 {% endif %}
-    		</div>
-    	</div>
-	</div><!--/row-->
-	<!-- End Service Blokcs -->
+            </div>
+        </div>
+    </div><!--/row-->
+    <!-- End Service Blokcs -->
 
     <!-- Google Maps -->
     <div class="row">
+        <a name="maprow"></a>
         <div class="col-md-12">
-            <div class="purchase">
+            <div class="purchase" id="map-container">
                 <div id="map-canvas" style="height: 500px"></div>
             </div>
         </div>
@@ -156,23 +211,23 @@
 
 <!--=== Copyright ===-->
 <div class="copyright">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6">						
-	            <p class="copyright-space">
-                    2013 &copy; Unify. ALL Rights Reserved. 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p class="copyright-space">
+                    2013 &copy; Unify. ALL Rights Reserved.
                     <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                 </p>
-			</div>
-			<div class="col-md-6">
-			</div>
-		</div><!--/row-->
-	</div><!--/container-->	
-</div><!--/copyright-->	
+            </div>
+            <div class="col-md-6">
+            </div>
+        </div><!--/row-->
+    </div><!--/container-->
+</div><!--/copyright-->
 <!--=== End Copyright ===-->
 
 
-<!-- JS Global Compulsory -->			
+<!-- JS Global Compulsory -->
 <script type="text/javascript" src="static/plugins/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="static/plugins/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="static/plugins/bootstrap/js/bootstrap.min.js"></script>
@@ -187,7 +242,7 @@
 <script type="text/javascript" src="static/js/pages/index.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
-      	App.init();
+        App.init();
         App.initSliders();
         Index.initParallaxSlider();
     });
