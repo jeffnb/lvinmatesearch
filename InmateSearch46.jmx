@@ -304,7 +304,7 @@ f.close();</stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
               </RegexExtractor>
               <hashTree/>
-              <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
+              <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
                 <boolProp name="resetInterpreter">false</boolProp>
@@ -325,6 +325,7 @@ import java.lang.String;
 		//String Age = &quot;27&quot;;
 		//String Date = &quot;11/28/2013&quot;;
 		//String Id = &quot;12345&quot;;
+		int Bail = 0
 		
 		int ChargeNum = Integer.parseInt(vars.get(&quot;lvCharges_matchNr&quot;));
 		//int ChargeNum = 5;
@@ -339,20 +340,24 @@ import java.lang.String;
 			Charges = Charges.concat(crg + &quot;:&quot;);
 		}
 		Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
+		
 		//Charges = vars.get(&quot;lvCharges&quot;);
 
 		int BailNum = Integer.parseInt(vars.get(&quot;lvBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
 	
-		String bal = &quot;&quot;;
+		string bal = &quot;&quot;;
+		int intBal = 0
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;lvBail_&quot; + k + &quot;_g1&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
 			if (!(bal.contains(&quot;Click&quot;) &amp;&amp; k &gt; 1))
-				Bail = Bail.concat(bal + &quot;:&quot;);
+				intBal = Integer.parseInt((bal))
+				Bail = intBal + Bail;
 		}
-		Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+		//Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
 
 		//Bond = vars.get(&quot;totalBond&quot;);
 	
@@ -503,7 +508,7 @@ import java.lang.String;
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="false">
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
               <stringProp name="BeanShellSampler.query">import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -522,6 +527,7 @@ import java.lang.String;
 		//String Date = &quot;11/28/2013&quot;;
 		//String Id = &quot;12345&quot;;
 		
+		
 		int ChargeNum = Integer.parseInt(vars.get(&quot;lvCharges_matchNr&quot;));
 		//int ChargeNum = 5;
 		
@@ -534,21 +540,26 @@ import java.lang.String;
 			//crg = &quot;Paste&quot;;
 			Charges = Charges.concat(crg + &quot;:&quot;);
 		}
-	
+		Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
+		
 		//Charges = vars.get(&quot;lvCharges&quot;);
 
 		int BailNum = Integer.parseInt(vars.get(&quot;lvBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
-	
+		int Bail = 0;
 		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;lvBail_&quot; + k + &quot;_g1&quot;);
-			if (!(bal.contains(&quot;Click&quot;) &amp;&amp; k &gt; 1))
-				Bail = Bail.concat(bal + &quot;:&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
-		Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+		
+		//Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
 
 		//Bond = vars.get(&quot;totalBond&quot;);
 	
@@ -556,11 +567,11 @@ import java.lang.String;
 		//print(Name);
 		// Pass true if you want to append to existing file
 		// If you want to overwrite, then don&apos;t pass the second argument
-		FileOutputStream f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
-		//f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
+		FileOutputStream f = new FileOutputStream(&quot;/Users/ryquinn/inmates.csv&quot;, true);
+		//f = new FileOutputStream(&quot;/Users/ryquinn/SchoolStar.txt&quot;);
 		PrintStream p = new PrintStream(f); 
 		//this.interpreter.setOut(p); 
-		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail);
+		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail + &quot;\n&quot;);
 		f.close();
 //	}
 //}
@@ -572,7 +583,7 @@ import java.lang.String;
             <hashTree/>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Henderson Inmate Search" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Henderson Inmate Search" enabled="false"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -1113,7 +1124,7 @@ f.close();</stringProp>
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Clark County Inmate Search" enabled="true"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Clark County Inmate Search" enabled="false"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/ccdcincustody/incustodysearch.aspx" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
