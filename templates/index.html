@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="static/css/themes/default.css" id="style_color">
     <!--<link rel="stylesheet" href="static/css/themes/headers/default.css" id="style_color-header-1">-->
 
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script>
             var map;
             function initialize() {
@@ -37,7 +37,7 @@
 
             google.maps.event.addDomListener(window, 'load', initialize);
 
-        </script>
+        </script>-->
 </head>	
 
 <body>
@@ -97,6 +97,7 @@
                                 <th>Book Date</th>
                                 <th>Prison</th>
                                 <th>Inmate ID</th>
+                                <th>Bail</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,6 +109,7 @@
                                 <td>{{ result['Book Date'] }}</td>
                                 <td>{{ result['Prison'] }}</td>
                                 <td>{{ result['ID'] }}</td>
+                                <td>{{ result['Bail'] }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -122,7 +124,7 @@
 	</div><!--/row-->
 	<!-- End Service Blokcs -->
 
-    <!-- Google Maps -->
+    <!-- Google Maps
     <div class="row">
         <div class="col-md-12">
             <div class="purchase">
