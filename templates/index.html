@@ -25,19 +25,37 @@
     <link rel="stylesheet" href="static/css/themes/default.css" id="style_color">
     <!--<link rel="stylesheet" href="static/css/themes/headers/default.css" id="style_color-header-1">-->
 
-    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
         <script>
+            var apiKey = 'AIzaSyAGTLAso302SnmP6RNqwUUfMhZX2kml9R8';
             var map;
+            var myLatLong = new google.maps.LatLng(36.1666705,-115.103375);
             function initialize() {
               var mapOptions = {
-                zoom: 8,
-                center: new google.maps.LatLng(-34.397, 150.644)};
+                zoom: 15,
+                center: myLatLong };
               map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+              //Detention center
+              var infowindow = new google.maps.InfoWindow({
+                   content: "<p>City of Las Vegas Detention Center"
+              });
+              var marker = new google.maps.Marker({
+                position: myLatLong,
+                map: map,
+                title: 'City Of Las Vegas Detention Center'
+               });
+               infowindow.open(map,marker);
+
+               //Get Bail bonds
+               var url = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=' + apiKey +
+                       '&location='+ myLatLong.toUrlValue() +'&radius=1000&sensor=false&keyword=bail%bonds';
+
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
 
-        </script>-->
+        </script>
 </head>	
 
 <body>
@@ -124,11 +142,11 @@
 	</div><!--/row-->
 	<!-- End Service Blokcs -->
 
-    <!-- Google Maps
+    <!-- Google Maps -->
     <div class="row">
         <div class="col-md-12">
             <div class="purchase">
-                <div id="map-canvas" style="height: 400px"></div>
+                <div id="map-canvas" style="height: 500px"></div>
             </div>
         </div>
     </div><!-- End Google Maps -->
