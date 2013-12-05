@@ -326,6 +326,7 @@ import java.lang.String;
 		//String Date = &quot;11/28/2013&quot;;
 		//String Id = &quot;12345&quot;;
 		
+		
 		int ChargeNum = Integer.parseInt(vars.get(&quot;lvCharges_matchNr&quot;));
 		//int ChargeNum = 5;
 		
@@ -339,20 +340,25 @@ import java.lang.String;
 			Charges = Charges.concat(crg + &quot;:&quot;);
 		}
 		Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
+		
 		//Charges = vars.get(&quot;lvCharges&quot;);
 
 		int BailNum = Integer.parseInt(vars.get(&quot;lvBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
-	
+		int Bail = 0;
 		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;lvBail_&quot; + k + &quot;_g1&quot;);
-			if (!(bal.contains(&quot;Click&quot;) &amp;&amp; k &gt; 1))
-				Bail = Bail.concat(bal + &quot;:&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
-		Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+		
+		//Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
 
 		//Bond = vars.get(&quot;totalBond&quot;);
 	
@@ -360,8 +366,8 @@ import java.lang.String;
 		//print(Name);
 		// Pass true if you want to append to existing file
 		// If you want to overwrite, then don&apos;t pass the second argument
-		FileOutputStream f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
-		//f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
+		FileOutputStream f = new FileOutputStream(&quot;/Users/ryquinn/inmates.csv&quot;, true);
+		//f = new FileOutputStream(&quot;/Users/ryquinn/SchoolStar.txt&quot;);
 		PrintStream p = new PrintStream(f); 
 		//this.interpreter.setOut(p); 
 		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail + &quot;\n&quot;);
@@ -522,6 +528,7 @@ import java.lang.String;
 		//String Date = &quot;11/28/2013&quot;;
 		//String Id = &quot;12345&quot;;
 		
+		
 		int ChargeNum = Integer.parseInt(vars.get(&quot;lvCharges_matchNr&quot;));
 		//int ChargeNum = 5;
 		
@@ -534,21 +541,26 @@ import java.lang.String;
 			//crg = &quot;Paste&quot;;
 			Charges = Charges.concat(crg + &quot;:&quot;);
 		}
-	
+		Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
+		
 		//Charges = vars.get(&quot;lvCharges&quot;);
 
 		int BailNum = Integer.parseInt(vars.get(&quot;lvBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
-	
+		int Bail = 0;
 		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;lvBail_&quot; + k + &quot;_g1&quot;);
-			if (!(bal.contains(&quot;Click&quot;) &amp;&amp; k &gt; 1))
-				Bail = Bail.concat(bal + &quot;:&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
-		Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+		
+		//Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
 
 		//Bond = vars.get(&quot;totalBond&quot;);
 	
@@ -556,11 +568,11 @@ import java.lang.String;
 		//print(Name);
 		// Pass true if you want to append to existing file
 		// If you want to overwrite, then don&apos;t pass the second argument
-		FileOutputStream f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
-		//f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
+		FileOutputStream f = new FileOutputStream(&quot;/Users/ryquinn/inmates.csv&quot;, true);
+		//f = new FileOutputStream(&quot;/Users/ryquinn/SchoolStar.txt&quot;);
 		PrintStream p = new PrintStream(f); 
 		//this.interpreter.setOut(p); 
-		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail);
+		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail + &quot;\n&quot;);
 		f.close();
 //	}
 //}
@@ -975,7 +987,7 @@ f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
 //f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
 p = new PrintStream(f); 
 this.interpreter.setOut(p); 
-print(&quot;Henderson,&quot; + Name + &quot;,no id,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bond);
+print(&quot;Henderson,&quot; + Name + &quot;,N/A,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bond);
 f.close();</stringProp>
               </BeanShellPostProcessor>
               <hashTree/>
@@ -1861,17 +1873,24 @@ int ChargeNum = Integer.parseInt(vars.get(&quot;charges_matchNr&quot;));
 Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
 //Charges = vars.get(&quot;clark_&quot; + c + &quot;_g1&quot;);
 
+
 int BailNum = Integer.parseInt(vars.get(&quot;ckBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
-	
+		int Bail = 0;
 		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;ckBail_&quot; + k + &quot;_g1&quot;);
-			Bail = Bail.concat(bal + &quot;:&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
-Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+
+
+
 //Bond = vars.get(&quot;clark_&quot; + c + &quot;_g1&quot;);
 
 //log.info(sr1);  // if you want to log something to jmeter.log file
