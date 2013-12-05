@@ -304,7 +304,7 @@ f.close();</stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
               </RegexExtractor>
               <hashTree/>
-              <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="false">
+              <BeanShellPostProcessor guiclass="TestBeanGUI" testclass="BeanShellPostProcessor" testname="BeanShell PostProcessor" enabled="true">
                 <stringProp name="filename"></stringProp>
                 <stringProp name="parameters"></stringProp>
                 <boolProp name="resetInterpreter">false</boolProp>
@@ -325,7 +325,7 @@ import java.lang.String;
 		//String Age = &quot;27&quot;;
 		//String Date = &quot;11/28/2013&quot;;
 		//String Id = &quot;12345&quot;;
-		int Bail = 0
+		
 		
 		int ChargeNum = Integer.parseInt(vars.get(&quot;lvCharges_matchNr&quot;));
 		//int ChargeNum = 5;
@@ -344,19 +344,20 @@ import java.lang.String;
 		//Charges = vars.get(&quot;lvCharges&quot;);
 
 		int BailNum = Integer.parseInt(vars.get(&quot;lvBail_matchNr&quot;));
-	
-		string bal = &quot;&quot;;
-		int intBal = 0
+		int Bail = 0;
+		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;lvBail_&quot; + k + &quot;_g1&quot;);
 			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
 			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
 			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
-			if (!(bal.contains(&quot;Click&quot;) &amp;&amp; k &gt; 1))
-				intBal = Integer.parseInt((bal))
-				Bail = intBal + Bail;
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
+		
 		//Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
 
 		//Bond = vars.get(&quot;totalBond&quot;);
@@ -365,8 +366,8 @@ import java.lang.String;
 		//print(Name);
 		// Pass true if you want to append to existing file
 		// If you want to overwrite, then don&apos;t pass the second argument
-		FileOutputStream f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
-		//f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
+		FileOutputStream f = new FileOutputStream(&quot;/Users/ryquinn/inmates.csv&quot;, true);
+		//f = new FileOutputStream(&quot;/Users/ryquinn/SchoolStar.txt&quot;);
 		PrintStream p = new PrintStream(f); 
 		//this.interpreter.setOut(p); 
 		p.print(&quot;Las Vegas,&quot; + Name + &quot;,&quot; + Id + &quot;,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bail + &quot;\n&quot;);
@@ -508,7 +509,7 @@ import java.lang.String;
               </HeaderManager>
               <hashTree/>
             </hashTree>
-            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="true">
+            <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler" enabled="false">
               <stringProp name="BeanShellSampler.query">import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -583,7 +584,7 @@ import java.lang.String;
             <hashTree/>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Henderson Inmate Search" enabled="false"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Henderson Inmate Search" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Search" enabled="true">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -986,7 +987,7 @@ f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
 //f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
 p = new PrintStream(f); 
 this.interpreter.setOut(p); 
-print(&quot;Henderson,&quot; + Name + &quot;,no id,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bond);
+print(&quot;Henderson,&quot; + Name + &quot;,N/A,&quot; + Age + &quot;,&quot; + Date + &quot;,&quot; + Charges + &quot;,&quot; + Bond);
 f.close();</stringProp>
               </BeanShellPostProcessor>
               <hashTree/>
@@ -1124,7 +1125,7 @@ f.close();</stringProp>
             </hashTree>
           </hashTree>
         </hashTree>
-        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Clark County Inmate Search" enabled="false"/>
+        <GenericController guiclass="LogicControllerGui" testclass="GenericController" testname="Clark County Inmate Search" enabled="true"/>
         <hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="/ccdcincustody/incustodysearch.aspx" enabled="false">
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" enabled="true">
@@ -1872,17 +1873,24 @@ int ChargeNum = Integer.parseInt(vars.get(&quot;charges_matchNr&quot;));
 Charges = Charges.replace(&quot;,&quot;,&quot;&quot;);
 //Charges = vars.get(&quot;clark_&quot; + c + &quot;_g1&quot;);
 
+
 int BailNum = Integer.parseInt(vars.get(&quot;ckBail_matchNr&quot;));
-		
-		String Bail = &quot;&quot;;
-	
+		int Bail = 0;
 		String bal = &quot;&quot;;
+		int intBal = 0;
 		
 		for (int k = 1; k &lt;= BailNum; k++) {
 			bal = vars.get(&quot;ckBail_&quot; + k + &quot;_g1&quot;);
-			Bail = Bail.concat(bal + &quot;:&quot;);
+			bal = bal.replace(&quot;$&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;,&quot;,&quot;&quot;);
+			bal = bal.replace(&quot;.00&quot;,&quot;&quot;);
+			if (!(bal.contains(&quot;Click&quot;)))
+				intBal = Integer.parseInt((bal));
+				Bail += intBal;
 		}
-Bail = Bail.replace(&quot;,&quot;, &quot;&quot;);
+
+
+
 //Bond = vars.get(&quot;clark_&quot; + c + &quot;_g1&quot;);
 
 //log.info(sr1);  // if you want to log something to jmeter.log file
