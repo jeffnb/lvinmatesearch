@@ -20,6 +20,9 @@ def main_page():
 
     return render_template('index.html', results=results, term=term)
 
+@app.route('/maptest')
+def map_test():
+    return render_template('maptest.html')
 
 if __name__ == '__main__':
     app.run()
