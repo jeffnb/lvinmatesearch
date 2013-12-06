@@ -2,7 +2,7 @@
 <jmeterTestPlan version="1.2" properties="2.5" jmeter="2.10 r1533061">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="InmateSearchFinal" enabled="true">
-      <stringProp name="TestPlan.comments">./jmeter -n -t &quot;/Users/macodari/Documents/lvinmatesearch/InmateSearchFinal.jmx&quot;</stringProp>
+      <stringProp name="TestPlan.comments">./jmeter -n -t &quot;/Users/macodari/Documents/lvinmatesearch/InmateSearch.jmx&quot;</stringProp>
       <boolProp name="TestPlan.functional_mode">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -61,7 +61,7 @@ f.close();</stringProp>
           <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
         </BeanShellSampler>
         <hashTree/>
-        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Las Vegas Inmate Search" enabled="true">
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
           <boolProp name="LoopController.continue_forever">true</boolProp>
           <stringProp name="LoopController.loops">26</stringProp>
         </LoopController>
@@ -1918,7 +1918,7 @@ f.close();</stringProp>
               <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="ckBail" enabled="true">
                 <stringProp name="RegexExtractor.useHeaders">false</stringProp>
                 <stringProp name="RegexExtractor.refname">ckBail</stringProp>
-                <stringProp name="RegexExtractor.regex">colspan=&quot;2&quot;&gt;&lt;font color\=&quot;\#ff0000&quot;&gt;.+?&lt;/font&gt;&lt;/td&gt;&lt;td width=&quot;17\%&quot;&gt;&lt;font color=&quot;\#ff0000&quot;&gt;(.+?)&lt;</stringProp>
+                <stringProp name="RegexExtractor.regex">colspan=&quot;2&quot;&gt;&lt;font color\=&quot;\#ff0000&quot;&gt;(.+?)&lt;</stringProp>
                 <stringProp name="RegexExtractor.template">$1$</stringProp>
                 <stringProp name="RegexExtractor.default">N/A</stringProp>
                 <stringProp name="RegexExtractor.match_number">-1</stringProp>
