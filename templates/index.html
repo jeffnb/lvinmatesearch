@@ -55,7 +55,7 @@
                 radius: 1000,
                 keyword: "bail bonds service"
             };
-            infowindow = new google.maps.InfoWindow();
+            infowindow = new google.maps.InfoWindow({ maxWidth: 320 });
             var service = new google.maps.places.PlacesService(map);
             service.nearbySearch(request, nearbyCallback);
             window.location.href = "#maprow";
