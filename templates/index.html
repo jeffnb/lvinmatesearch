@@ -48,6 +48,7 @@
                 title: name
             });
             prisonwindow.open(map,marker);
+            google.maps.event.addListener(marker, 'click', function() { prisonwindow.open(map, marker);});
 
             //Get Bail bonds
             var request = {
@@ -226,7 +227,6 @@
             <div class="col-md-6">
                 <p class="copyright-space">
                     2013 &copy; Unify. ALL Rights Reserved.
-                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
                 </p>
             </div>
             <div class="col-md-6">
