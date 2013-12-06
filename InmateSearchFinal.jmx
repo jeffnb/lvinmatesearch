@@ -2,7 +2,12 @@
 <jmeterTestPlan version="1.2" properties="2.5" jmeter="2.10 r1533061">
   <hashTree>
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="InmateSearchFinal" enabled="true">
-      <stringProp name="TestPlan.comments">./jmeter -n -t &quot;/Users/macodari/Documents/lvinmatesearch/InmateSearchFinal.jmx&quot;</stringProp>
+      <stringProp name="TestPlan.comments">./jmeter -n -t &quot;/Users/macodari/Documents/lvinmatesearch/InmateSearchFinal.jmx&quot;
+
+ssh root@198.199.116.68
+ymkwooltdgpa
+
+swdata.csv</stringProp>
       <boolProp name="TestPlan.functional_mode">true</boolProp>
       <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
       <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
