@@ -4,8 +4,6 @@
     <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="InmateSearchFinal" enabled="true">
       <stringProp name="TestPlan.comments">./jmeter -n -t &quot;/Users/macodari/Documents/lvinmatesearch/InmateSearchFinal.jmx&quot;
 
-ssh root@198.199.116.68
-ymkwooltdgpa
 
 swdata.csv</stringProp>
       <boolProp name="TestPlan.functional_mode">true</boolProp>
