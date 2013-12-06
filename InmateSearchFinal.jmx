@@ -51,7 +51,7 @@
 
 // Pass true if you want to append to existing file
 // If you want to overwrite, then don&apos;t pass the second argument
-f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;);
+f = new FileOutputStream(&quot;inmates.csv&quot;);
 p = new PrintStream(f); 
 this.interpreter.setOut(p); 
 print(&quot;Prison,Last Name,First Name,ID,Age,Book Date,Charges,Bail&quot;);
@@ -439,7 +439,7 @@ import java.lang.String;
 		//print(Name);
 		// Pass true if you want to append to existing file
 		// If you want to overwrite, then don&apos;t pass the second argument
-		FileOutputStream f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
+		FileOutputStream f = new FileOutputStream(&quot;inmates.csv&quot;, true);
 		//f = new FileOutputStream(&quot;/Users/ryquinn/SchoolStar.txt&quot;);
 		PrintStream p = new PrintStream(f); 
 		//this.interpreter.setOut(p); 
@@ -1059,7 +1059,7 @@ Bond = Bond.replace(&quot;.00&quot;,&quot;&quot;);
 //print(Name);
 // Pass true if you want to append to existing file
 // If you want to overwrite, then don&apos;t pass the second argument
-f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
+f = new FileOutputStream(&quot;inmates.csv&quot;, true);
 //f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
 p = new PrintStream(f); 
 this.interpreter.setOut(p); 
@@ -1973,7 +1973,7 @@ int BailNum = Integer.parseInt(vars.get(&quot;ckBail_matchNr&quot;));
 //print(Name);
 // Pass true if you want to append to existing file
 // If you want to overwrite, then don&apos;t pass the second argument
-f = new FileOutputStream(&quot;/Users/macodari/inmates.csv&quot;, true);
+f = new FileOutputStream(&quot;inmates.csv&quot;, true);
 //f = new FileOutputStream(&quot;/Users/macodari/SchoolStar.txt&quot;);
 p = new PrintStream(f); 
 this.interpreter.setOut(p); 
