@@ -75,7 +75,7 @@
             var marker = new google.maps.Marker({
                 map: map,
                 position: place.geometry.location,
-                icon: "http://maps.google.com/mapfiles/marker_grey.png"
+                icon: "http://labs.google.com/ridefinder/images/mm_20_green.png"
             });
 
             google.maps.event.addListener(marker, 'click', function() {
@@ -85,17 +85,17 @@
         }
 
         function initializeLV(){
-            initialize(36.1666705,-115.103375, 'City Of Las Vegas Detention Center - (702) 229-6099');
+            initialize(36.1666705,-115.103375, '<div id="content"><p>City Of Las Vegas Detention Center</p><p>(702) 229-6099</p></div>');
             return false;
         }
 
         function initializeHenderson(){
-            initialize(36.0310225,-114.97872489999997, 'Henderson Detention Center - (702) 267-5245');
+            initialize(36.0310225,-114.97872489999997, '<div id="content"><p>Henderson Detention Center</p><p>(702) 267-5245</p></div>');
             return false;
         }
 
         function initializeClarkCounty(){
-            initialize(36.1673983,-115.14681180000002, 'Clark County Detention Center - (702) 671-3900');
+            initialize(36.1673983,-115.14681180000002, '<div id="content"><p>Clark County Detention Center</p><p>(702) 671-3900</p></div>');
             return false;
         }
 
