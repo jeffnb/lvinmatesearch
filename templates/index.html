@@ -72,6 +72,7 @@
 
         function createMarker(place) {
             var placeLoc = place.geometry.location;
+
             var marker = new google.maps.Marker({
                 map: map,
                 position: place.geometry.location,
@@ -79,7 +80,16 @@
             });
 
             google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(place.name);
+                var content = '<div id="content"><p>'+place.name+'</p>';
+                if(place.formatted_phone_number){
+                    content += '<p>'+place.formatted_phone_number+'</p>';
+                }
+                if(place.website){
+                    content += '<p>'+place.website+'</p>';
+                }
+                content += '</div>';
+
+                infowindow.setContent(content);
                 infowindow.open(map, this);
             });
         }
@@ -171,11 +181,11 @@
                                         <td>{{ result['Age'] }}</td>
                                         <td>{{ result['Book Date'] }}</td>
                                         {% if result['Prison'] == 'Las Vegas' %}
-                                            <td><a onclick="initializeLV();">{{ result['Prison'] }}</a></td>
+                                            <td><a class="linky" onclick="initializeLV();">{{ result['Prison'] }}</a></td>
                                         {% elif result['Prison'] == 'Henderson' %}
-                                            <td><a onclick="initializeHenderson();">{{ result['Prison'] }}</a></td>
+                                            <td><a class="linky" onclick="initializeHenderson();">{{ result['Prison'] }}</a></td>
                                         {% elif result['Prison'] == 'Clark County' %}
-                                            <td><a onclick="initializeClarkCounty();">{{ result['Prison'] }}</a></td>
+                                            <td><a class="linky" onclick="initializeClarkCounty();">{{ result['Prison'] }}</a></td>
                                         {% else %}
                                             <td>{{ result['Prison'] }}</td>
                                         {% endif %}

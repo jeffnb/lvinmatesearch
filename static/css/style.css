@@ -39,7 +39,9 @@
 .headline-md {
 	margin-bottom: 15px;
 }
-
+.linky {
+    text-decoration: underline;
+}
 /*Purchase Block*/
 .purchase {
 	padding: 30px 0;
