@@ -56,7 +56,7 @@ def clarkCountyInmate():
     data = ('__VIEWSTATE=%2FwEPDwUIOTE5NTg4NjhkZGvx05uXGR%2BWuRIOdPjT9KzcmuLh1J8Zk1gT0J0aC2Wi&'
             '__EVENTVALIDATION=%2FwEdAAWCIueLxX7W6RwIfnVWJPj0JNOHGRTiA26VmVCqyHoxqsWzilCqUZiLm2Tkt0sWoCWjOglmm5fGSk5Ukp'
             'FsfK4enirgrpbTwEsK9BgCJuFqya%2FmyQJ7PsrYEacOYfCQSaPsSvX6AACoCDB8vMSi31O9&'
-            'TxtID=&txtName=Ryan&SearchName=++Submit++')
+            'TxtID=&txtName=__&SearchName=++Submit++')
     headers = {'content-type': 'application/x-www-form-urlencoded',
                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                'Accept-Language': 'en-US,en;q=0.5',
@@ -89,12 +89,12 @@ def clarkCountyInmate():
                         bail = bail.replace('.00','')
                         tBail += int(bail)
         savedata = {'id': ccid,
-                    'location': 'Henderson',
+                    'location': 'Clark County',
                     'name': ccname,
                     'age': ccage,
                     'book_date': ccdate,
                     'bail': tBail}
-
+        print savedata
         scraperwiki.sqlite.save(unique_keys=['id'], data=savedata)
 
 def hendersonInmate():
