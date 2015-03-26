@@ -13,7 +13,7 @@ def main_page():
 
     if request.method == 'POST' and 'term' in request.form:
         term = request.form['term']
-        url = 'http://demo.ckan.org/api/action/datastore_search?resource_id=afeb9507-52cb-484e-a160-338b2326a5c8&q='+term
+        url = 'http://demo.ckan.org/api/action/datastore_search?resource_id=4f30b925-0d6a-4864-865c-e018b57bd558&q='+term
         response = requests.get(url)
         data = json.loads(response.content)
         results = data["result"]["records"]
