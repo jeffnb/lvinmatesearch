@@ -165,8 +165,7 @@
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th>Last Name</th>
-                                    <th>First Name</th>
+                                    <th>Name</th>
                                     <th>Age</th>
                                     <th>Book Date</th>
                                     <th>Prison</th>
@@ -177,22 +176,21 @@
                                 <tbody>
                                 {% for result in results %}
                                     <tr>
-                                        <td>{{ result['Last Name'] }}</td>
-                                        <td>{{ result['First Name'] }}</td>
-                                        <td>{{ result['Age'] }}</td>
-                                        <td>{{ result['Book Date'] }}</td>
-                                        {% if result['Prison'] == 'Las Vegas' %}
-                                            <td><a class="linky" onclick="initializeLV();">{{ result['Prison'] }}</a></td>
-                                        {% elif result['Prison'] == 'Henderson' %}
-                                            <td><a class="linky" onclick="initializeHenderson();">{{ result['Prison'] }}</a></td>
-                                        {% elif result['Prison'] == 'Clark County' %}
-                                            <td><a class="linky" onclick="initializeClarkCounty();">{{ result['Prison'] }}</a></td>
+                                        <td>{{ result['name'] }}</td>
+                                        <td>{{ result['age'] }}</td>
+                                        <td>{{ result['book_date'] }}</td>
+                                        {% if result['location'] == 'Las Vegas' %}
+                                            <td><a class="linky" onclick="initializeLV();">{{ result['location'] }}</a></td>
+                                        {% elif result['location'] == 'Henderson' %}
+                                            <td><a class="linky" onclick="initializeHenderson();">{{ result['location'] }}</a></td>
+                                        {% elif result['location'] == 'Clark County' %}
+                                            <td><a class="linky" onclick="initializeClarkCounty();">{{ result['location'] }}</a></td>
                                         {% else %}
-                                            <td>{{ result['Prison'] }}</td>
+                                            <td>{{ result['location'] }}</td>
                                         {% endif %}
 
-                                        <td>{{ result['ID'] }}</td>
-                                        <td>${{ result['Bail']|int(0) }}</td>
+                                        <td>{{ result['id'] }}</td>
+                                        <td>${{ result['bail']|int(0) }}</td>
                                     </tr>
                                 {% endfor %}
                                 </tbody>
